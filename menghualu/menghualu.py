@@ -129,3 +129,6 @@ def menghualu():
         if len(url_list) > 0:
             print(i)
             open_browser_auto_refresh(url_list, interval_time)
+
+if __name__ == "__main__":
+    menghualu()
