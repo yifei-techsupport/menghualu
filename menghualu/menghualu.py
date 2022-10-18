@@ -64,7 +64,7 @@ def open_browser_auto_refresh(url_list, interval_time):
             raise Exception("无浏览器可用")
 
 
-def menghualu():
+def play_menghualu():
     url_dict = {'1':'https://v.qq.com/x/cover/mzc00200p51jpn7/t0042h23a9d.html',
             '2':'https://v.qq.com/x/cover/mzc00200p51jpn7/s004237dmoq.html',
             '3':'https://v.qq.com/x/cover/mzc00200p51jpn7/w0042lrzofx.html',
@@ -130,5 +130,3 @@ def menghualu():
             print(i)
             open_browser_auto_refresh(url_list, interval_time)
 
-if __name__ == "__main__":
-    menghualu()
