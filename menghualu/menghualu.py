@@ -1,6 +1,9 @@
+import playwright
 from playwright.sync_api import sync_playwright
 import time
 import random
+import math
+import subprocess
 
 
 def open_browser_auto_refresh(url_list, interval_time):
@@ -62,7 +65,7 @@ def open_browser_auto_refresh(url_list, interval_time):
 
 
 def menghualu():
-	url_dict = {'1':'https://v.qq.com/x/cover/mzc00200p51jpn7/t0042h23a9d.html',
+    url_dict = {'1':'https://v.qq.com/x/cover/mzc00200p51jpn7/t0042h23a9d.html',
             '2':'https://v.qq.com/x/cover/mzc00200p51jpn7/s004237dmoq.html',
             '3':'https://v.qq.com/x/cover/mzc00200p51jpn7/w0042lrzofx.html',
             '4':'https://v.qq.com/x/cover/mzc00200p51jpn7/n0042uyyrj8.html',
@@ -103,23 +106,26 @@ def menghualu():
             '39':'https://v.qq.com/x/cover/mzc00200p51jpn7/y0043nfzbsm.html',
             '40':'https://v.qq.com/x/cover/mzc00200p51jpn7/y0043a3qg2h.html'}
 
-	interval_time = 1380
-
-	selected_ep_str = input('请选择非会员的6集或以下，以‘/’隔开（例如1/2/3/5/6）: ')
-	running_time = input('请输入使用时长，单位为分钟（例：600）: ')
-	selected_ep = selected_ep_str.split('/')
-	selected_ep = list(set(selected_ep))
-	url_list = []
-	for ep in selected_ep:
-	    try:
-	        url_list.append(url_dict[ep])
-	    except:
-	        pass
-	try:
-	    running_time = int(running_time)
-	except:
-	    running_time = 0
-	for _ in range(round(running_time*60/interval_time,0)):
-	    if len(url_list) > 0:
-	        open_browser_auto_refresh(url_list, interval_time)
-
+    interval_time = 1380
+    # first_time = input('是否为初次使用，请输入Y或N: ')
+    # if str.lower(first_time) == 'y':
+    #     subprocess.Popen("playwright install", close_fds=True)
+	
+    selected_ep_str = input('请选择6集或更少的非会员集，以‘/’隔开（例如1/2/3/5/6）: ')
+    running_time = input('请输入使用时长，单位为分钟（例：600）: ')
+    selected_ep = selected_ep_str.split('/')
+    selected_ep = list(set(selected_ep))
+    url_list = []
+    for ep in selected_ep:
+        try:
+            url_list.append(url_dict[ep])
+        except:
+            pass
+    try:
+        running_time = int(running_time)
+    except:
+        running_time = 0
+    for i in range(math.ceil(running_time*60/interval_time)):
+        if len(url_list) > 0:
+            print(i)
+            open_browser_auto_refresh(url_list, interval_time)
